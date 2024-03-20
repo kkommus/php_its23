@@ -51,7 +51,7 @@ if (isset($_POST['nimetus'])) {
     //print_r($nimetus);
     fclose($fp);
     //suunab "puhtale" lehele
-    header('Location:03.php?page=services&ok');
+    header('Location:prog5.php?page=services&ok');
 }
 
 ?>

@@ -1,87 +1,19 @@
-<!DOCTYPE html>
-<html lang="et">
-<head>
-    <title>Title</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+<?php
+include("header.php");
+?>
 
-    <style>
-        .navbar {
-            background-color: #CCCCCC; /* Hall taustavärv */
-        }
+<?php
+if (isset($_GET['page'])) {
+    $page = $_GET["page"];
+    if ($page=="services") {
+        include("services.php");
+    }elseif($page=="contact"){
+        include("contact.php");
+    }
+}else{
+?>
 
-        .image-container {
-            display: flex;
-            justify-content: space-between;
-            padding: 40px; /* Võite muuta vastavalt soovile */
-            height: 400px; /* Kõrgus, reguleerige vastavalt soovile */
-        }
-
-        .image-container div {
-            position: relative;
-            flex: 1;
-            margin-right: 30px; /* Lisa soovitud vahe piltide vahele */
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Pildi asendamise viis */
-           
-        }
-        .image-caption {
-            position: absolute;
-            bottom: 75px;
-            right: -40px;
-            font-size: 18px; /* Teksti suurus */
-            border: 2px solid #ffffff; /* Piirjoon kasti ümber */
-            max-width: 21%; 
-            padding: 5px 10px; /* Vahemik teksti ja kasti piiri vahel */
-           
-            
-        }
-        
-
-    </style>
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg ms-3 me-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">KeitiKommus.ee</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Avaleht</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pood</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Kontakt</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-dash-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M6 9.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z" />
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="image-container">
+<div class="image-container">
         <div>
             <img src="image1.jpg" alt="Image 1" class="img-fluid">
             <div class="image-caption">Vaata lähemalt</div>
@@ -94,48 +26,66 @@
 
     <div class="container mt-5">
     <h1 class="text-center">Parimad pakkumised</h1><br>
-    <div class="row">
-        <!-- PHP algus -->
-        <?php
-        // Toote andmed
-        $products = array(
-            array("image_url" => "pilt1.jpg", "product_name" => "Toode 1", "price" => "10€"),
-            array("image_url" => "pilt2.jpg", "product_name" => "Toode 2", "price" => "20€"),
-            array("image_url" => "pilt3.jpg", "product_name" => "Toode 3", "price" => "30€"),
-            array("image_url" => "pilt4.jpg", "product_name" => "Toode 4", "price" => "40€"),
-            array("image_url" => "pilt5.jpg", "product_name" => "Toode 1", "price" => "10€"),
-            array("image_url" => "pilt6.jpg", "product_name" => "Toode 2", "price" => "20€"),
-            array("image_url" => "pilt7.jpg", "product_name" => "Toode 3", "price" => "30€"),
-            array("image_url" => "pilt8.jpg", "product_name" => "Toode 4", "price" => "40€")
-        );
+    <?php
+if (isset($_POST['nimetus'])) {
+    $ajutine_fail =  $_FILES['lisapilt']['tmp_name'];
+    move_uploaded_file($ajutine_fail, 'img/'.$_FILES['lisapilt']['name']);
+    $read=array();
 
-        // Kuvame tooted
-        foreach ($products as $product) {
-            echo '<div class="col-md-3">';
-            echo '<div class="card">';
-            echo '<img src="' . $product["image_url"] . '" class="card-img-top" alt="' . $product["product_name"] . '">';
-            echo '<div class="card-body">';
-            echo '<h5 class="card-title">' . $product["product_name"] . '</h5>';
-            echo '<p class="card-text">' . $product["price"] . '</p>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
+    $id = array_push($read,count(file('products.csv'))+1);
+
+    $nimetus = array_push($read, $_POST['nimetus']);
+    $kirjeldus = array_push($read, $_POST['kirjeldus']);
+    $hind = array_push($read, $_POST['hind']);
+    $pildinimi = array_push($read, $_FILES['lisapilt']['name']);
+
+
+    $path = 'products.csv';
+    $fp = fopen($path, 'a'); 
+    fputcsv($fp, $read);
+    //print_r($nimetus);
+    fclose($fp);
+    //suunab "puhtale" lehele
+    header('Location:prog5.php?page=services&ok');
+}
+
+?>
+
+
+
+<div class="row row-cols-1 row-cols-md-4 g-4 pt-5">
+<?php
+    //faili avamine
+    $products = "products.csv";
+    $minu_csv = fopen($products, "r");
+
+    //kõikide ridade saamine feof = file-end-of-file
+    while (!feof($minu_csv)) {
+        //ühe rea saamine, eraldatud komaga
+        $rida = fgetcsv($minu_csv, filesize($products), ",");
+        //print_r($rida);
+        // echo "$rida[1] - $rida[3]€<br>";
+        if (is_array($rida)) {
+            echo '
+            <div class="col">
+                <div class="card">
+                    <img src="img/'.$rida[4].'" class="card-img-top" alt="'.$rida[1].'">
+                    <div class="card-body">
+                    <h5 class="card-title">'.$rida[1].'</h5>
+                    <p class="card-text">'.$rida[2].'</p>
+                    <p class="card-text">Hind:  '.$rida[3].'€</p>
+                    </div>
+                </div>
+            </div>
+            ';
+            }
         }
-        ?>
-        <!-- PHP lõpp -->
-    </div><br>
+    fclose($minu_csv);
+?>
+
 </div>
 
-<nav class="navbar navbar-expand-lg ms-3 me-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Keiti Kõmmus</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-</footer>
-
-
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-</body>
-</html>
+<?php
+}
+include("footer.php");
+?>
