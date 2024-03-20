@@ -84,7 +84,8 @@ if (isset($_POST['nimetus'])) {
 ?>
 
 </div>
-
+<br>
+<br>
 <?php
 }
 include("footer.php");
