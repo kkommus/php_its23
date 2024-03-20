@@ -3,7 +3,7 @@
 <head>
     <title>Title</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
     <style>
@@ -93,9 +93,46 @@
     </div>
 
     <div class="container mt-5">
-        <h1 class="text-center">Parimad pakkumised
-        </h1>
-    </div>
+    <h1 class="text-center">Parimad pakkumised</h1><br>
+    <div class="row">
+        <!-- PHP algus -->
+        <?php
+        // Toote andmed
+        $products = array(
+            array("image_url" => "pilt1.jpg", "product_name" => "Toode 1", "price" => "10€"),
+            array("image_url" => "pilt2.jpg", "product_name" => "Toode 2", "price" => "20€"),
+            array("image_url" => "pilt3.jpg", "product_name" => "Toode 3", "price" => "30€"),
+            array("image_url" => "pilt4.jpg", "product_name" => "Toode 4", "price" => "40€"),
+            array("image_url" => "pilt5.jpg", "product_name" => "Toode 1", "price" => "10€"),
+            array("image_url" => "pilt6.jpg", "product_name" => "Toode 2", "price" => "20€"),
+            array("image_url" => "pilt7.jpg", "product_name" => "Toode 3", "price" => "30€"),
+            array("image_url" => "pilt8.jpg", "product_name" => "Toode 4", "price" => "40€")
+        );
+
+        // Kuvame tooted
+        foreach ($products as $product) {
+            echo '<div class="col-md-3">';
+            echo '<div class="card">';
+            echo '<img src="' . $product["image_url"] . '" class="card-img-top" alt="' . $product["product_name"] . '">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $product["product_name"] . '</h5>';
+            echo '<p class="card-text">' . $product["price"] . '</p>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+        ?>
+        <!-- PHP lõpp -->
+    </div><br>
+</div>
+
+<nav class="navbar navbar-expand-lg ms-3 me-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Keiti Kõmmus</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+</footer>
+
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
