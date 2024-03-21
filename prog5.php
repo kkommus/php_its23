@@ -7,85 +7,81 @@ if (isset($_GET['page'])) {
     $page = $_GET["page"];
     if ($page=="services") {
         include("services.php");
-    }elseif($page=="contact"){
+    } elseif ($page=="contact") {
         include("contact.php");
     }
-}else{
+} else {
 ?>
 
 <div class="image-container">
-        <div>
-            <img src="image1.jpg" alt="Image 1" class="img-fluid">
-            <div class="image-caption">Vaata lähemalt</div>
-        </div>
-        <div>
-            <img src="image2.jpg" alt="Image 2" class="img-fluid">
-            <div class="image-caption">Tutvu lähemalt</div>
-        </div>
+    <div>
+        <img src="image1.jpg" alt="Image 1" class="img-fluid">
+        <div class="image-caption">Vaata lähemalt</div>
     </div>
+    <div>
+        <img src="image2.jpg" alt="Image 2" class="img-fluid">
+        <div class="image-caption">Tutvu lähemalt</div>
+    </div>
+</div>
 
-    <div class="container mt-5">
+<div class="container mt-5">
     <h1 class="text-center">Parimad pakkumised</h1><br>
     <?php
-if (isset($_POST['nimetus'])) {
-    $ajutine_fail =  $_FILES['lisapilt']['tmp_name'];
-    move_uploaded_file($ajutine_fail, 'img/'.$_FILES['lisapilt']['name']);
-    $read=array();
+    if (isset($_POST['nimetus'])) {
+        $ajutine_fail =  $_FILES['lisapilt']['tmp_name'];
+        move_uploaded_file($ajutine_fail, 'img/'.$_FILES['lisapilt']['name']);
+        $read=array();
 
-    $id = array_push($read,count(file('products.csv'))+1);
+        $id = array_push($read,count(file('products.csv'))+1);
 
-    $nimetus = array_push($read, $_POST['nimetus']);
-    $kirjeldus = array_push($read, $_POST['kirjeldus']);
-    $hind = array_push($read, $_POST['hind']);
-    $pildinimi = array_push($read, $_FILES['lisapilt']['name']);
-
-
-    $path = 'products.csv';
-    $fp = fopen($path, 'a'); 
-    fputcsv($fp, $read);
-    //print_r($nimetus);
-    fclose($fp);
-    //suunab "puhtale" lehele
-    header('Location:prog5.php?page=services&ok');
-}
-
-?>
+        $nimetus = array_push($read, $_POST['nimetus']);
+        $kirjeldus = array_push($read, $_POST['kirjeldus']);
+        $hind = array_push($read, $_POST['hind']);
+        $pildinimi = array_push($read, $_FILES['lisapilt']['name']);
 
 
+        $path = 'products.csv';
+        $fp = fopen($path, 'a'); 
+        fputcsv($fp, $read);
+        fclose($fp);
+        header('Location: prog5.php?page=services&ok');
+        exit; // Lisatud exit, et lõpetada skripti töö pärast suunamist
+    }
+    ?>
 
-<div class="row row-cols-1 row-cols-md-4 g-4 pt-5">
-<?php
-    //faili avamine
-    $products = "products.csv";
-    $minu_csv = fopen($products, "r");
 
-    //kõikide ridade saamine feof = file-end-of-file
-    while (!feof($minu_csv)) {
-        //ühe rea saamine, eraldatud komaga
-        $rida = fgetcsv($minu_csv, filesize($products), ",");
-        //print_r($rida);
-        // echo "$rida[1] - $rida[3]€<br>";
-        if (is_array($rida)) {
-            echo '
+    <div class="row row-cols-1 row-cols-md-4 g-4 pt-5">
+        <?php
+        //faili avamine
+        $products = "products.csv";
+        $minu_csv = fopen($products, "r");
+
+        //kõikide ridade saamine feof = file-end-of-file
+        while (!feof($minu_csv)) {
+            //ühe rea saamine, eraldatud komaga
+            $rida = fgetcsv($minu_csv, filesize($products), ",");
+            if (is_array($rida)) {
+                echo '
             <div class="col">
                 <div class="card">
-                    <img src="img/'.$rida[4].'" class="card-img-top" alt="'.$rida[1].'">
+                <img src="img/' . $rida[3] . '" class="card-img-top" alt="' . $rida[0] . '">
                     <div class="card-body">
-                    <h5 class="card-title">'.$rida[1].'</h5>
-                    <p class="card-text">'.$rida[2].'</p>
-                    <p class="card-text">Hind:  '.$rida[3].'€</p>
+                    <h5 class="card-title">' . $rida[0] . '</h5>
+                    <p class="card-text">' . $rida[1] . '</p>
+                    <p class="card-text">Hind:  ' . $rida[2] . '€</p>
                     </div>
                 </div>
             </div>
             ';
             }
         }
-    fclose($minu_csv);
-?>
+        fclose($minu_csv);
+        ?>
 
+    </div>
+    <br>
+    <br>
 </div>
-<br>
-<br>
 <?php
 }
 include("footer.php");

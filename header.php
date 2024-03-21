@@ -26,6 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
+    
     <style>
         .navbar {
             background-color: #CCCCCC; /* Hall taustavärv */
@@ -76,17 +77,20 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Avaleht</a>
+                        <li class="nav-link">
+                            <a href="prog5.php" style="color: black; text-decoration: none;">Avaleht</a>
+
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pood</a>
+                        <li class="nav-link">
+                        <a href="pood.php" style="color: black; text-decoration: none;">Pood</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Kontakt</a>
+                        <li class="nav-link">
+                        <a href="contact.php" style="color: black; text-decoration: none;">Kontakt</a>
+
                         </li>
-                        <li class="nav-item">
-                        <a href="services.php">Admin</a>
+                        <li class="nav-link">
+                        <a href="services.php" style="color: black; text-decoration: none;">Admin</a>
+
 
                         </li>
                         <li class="nav-item">

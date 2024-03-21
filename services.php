@@ -1,91 +1,120 @@
+<?php
+include("header.php");
+?>
+
+<br>
 <h1>Teenused</h1>
 
 <?php
-    if (isset($_GET['ok'])) {
-            echo '<div class="alert alert-success" role="alert">
-            Toote lisamine õnnestus!
-            </div>
-            ';
-    }
-
-
-
+if (isset($_GET['ok'])) {
+    echo '<div class="alert alert-success" role="alert">
+    Toote lisamine õnnestus!
+    </div>';
+}
 ?>
 
-
-
 <form action="" method="post" enctype="multipart/form-data">
-    <label for="nimetus">Toote nimetus</label>
-    <input type="text" name="nimetus" required><br>
+    <div class="mb-3">
+        <label for="nimetus" class="form-label">Toote nimetus</label>
+        <input type="text" class="form-control" id="nimetus" name="nimetus" required>
+    </div>
 
-    <label for="kirjeldus">Toote kirjeldus</label>
-    <input type="text" name="kirjeldus" required><br>
+    <div class="mb-3">
+        <label for="kirjeldus" class="form-label">Toote kirjeldus</label>
+        <input type="text" class="form-control" id="kirjeldus" name="kirjeldus" required>
+    </div>
 
-    <label for="hind">Toote hind</label>
-    <input type="number" min="0.00" max="100.00" step="0.01" name="hind" required><br>
-
-    <label for="lisapilt"></label>
-    <input type="file" name="lisapilt"><br>
+    <div class="mb-3">
+        <label for="hind" class="form-label">Toote hind</label>
+        <input type="number" class="form-control" id="hind" name="hind" min="0.00" max="100.00" step="0.01" required>
+    </div>
 
     <input type="hidden" name="page" value="services">
 
-    <input class="btn btn-success" type="submit" value="Lisa uus toode">
+    <button type="submit" class="btn btn-success">Lisa uus toode</button>
 </form>
+
 <?php
 if (isset($_POST['nimetus'])) {
-    $ajutine_fail =  $_FILES['lisapilt']['tmp_name'];
-    move_uploaded_file($ajutine_fail, 'img/'.$_FILES['lisapilt']['name']);
-    $read=array();
+    $nimetus = $_POST['nimetus'];
+    $kirjeldus = $_POST['kirjeldus'];
+    $hind = $_POST['hind'];
 
-    $id = array_push($read,count(file('products.csv'))+1);
+    // Juhusliku pildi URL-i hankimine Lorem Picsum'ist
+    $image_id = rand(1, 1000); // Loob juhusliku pildi ID vahemikus 1-1000
+    $image_url = "https://picsum.photos/id/{$image_id}/200/300"; // Genereerib juhusliku pildi URL-i
 
-    $nimetus = array_push($read, $_POST['nimetus']);
-    $kirjeldus = array_push($read, $_POST['kirjeldus']);
-    $hind = array_push($read, $_POST['hind']);
-    $pildinimi = array_push($read, $_FILES['lisapilt']['name']);
+    // Pildi allalaadimine ja salvestamine
+    $ajutine_fail = file_get_contents($image_url);
+    $pildinimi = uniqid() . '.jpg'; // Unikaalne pildi nimi
+    file_put_contents('img/' . $pildinimi, $ajutine_fail);
 
-
+    // CSV faili kirjutamine
     $path = 'products.csv';
-    $fp = fopen($path, 'a'); 
-    fputcsv($fp, $read);
-    //print_r($nimetus);
+    $fp = fopen($path, 'a');
+    fputcsv($fp, array($nimetus, $kirjeldus, $hind, $pildinimi));
     fclose($fp);
-    //suunab "puhtale" lehele
-    header('Location:prog5.php?page=services&ok');
-}
 
+    // Suunab "puhtale" lehele
+    header('Location: prog5.php?page=services&ok');
+    exit;
+}
 ?>
 
-
-
 <div class="row row-cols-1 row-cols-md-4 g-4 pt-5">
-<?php
-    //faili avamine
+    <?php
+    // Faili avamine
     $products = "products.csv";
     $minu_csv = fopen($products, "r");
 
-    //kõikide ridade saamine feof = file-end-of-file
+    // Kõikide ridade saamine feof = file-end-of-file
     while (!feof($minu_csv)) {
-        //ühe rea saamine, eraldatud komaga
+        // Ühe rea saamine, eraldatud komaga
         $rida = fgetcsv($minu_csv, filesize($products), ",");
-        //print_r($rida);
-        // echo "$rida[1] - $rida[3]€<br>";
         if (is_array($rida)) {
             echo '
             <div class="col">
                 <div class="card">
-                    <img src="img/'.$rida[4].'" class="card-img-top" alt="'.$rida[1].'">
+                    <img src="img/' . $rida[3] . '" class="card-img-top" alt="' . $rida[0] . '">
                     <div class="card-body">
-                    <h5 class="card-title">'.$rida[1].'</h5>
-                    <p class="card-text">'.$rida[2].'</p>
-                    <p class="card-text">Hind:  '.$rida[3].'€</p>
+                    <h5 class="card-title">' . $rida[0] . '</h5>
+                    <p class="card-text">' . $rida[1] . '</p>
+                    <p class="card-text">Hind:  ' . $rida[2] . '€</p>
+                    <form action="" method="post">
+                        <input type="hidden" name="delete_id" value="' . $rida[0] . '">
+                        <button type="submit" class="btn btn-danger">Kustuta</button>
+                    </form>
                     </div>
                 </div>
             </div>
             ';
+        }
+    }
+    fclose($minu_csv);
+
+    // Kustutamisvormi töötlemine
+    if (isset($_POST['delete_id'])) {
+        $delete_id = $_POST['delete_id'];
+        $rows = file($products);
+        $output = '';
+
+        foreach ($rows as $row) {
+            $data = str_getcsv($row);
+            if ($data[0] !== $delete_id) {
+                $output .= $row;
             }
         }
-    fclose($minu_csv);
-?>
 
+        file_put_contents($products, $output);
+        header("Location: {$_SERVER['PHP_SELF']}"); // Värskendab lehte pärast kustutamist
+        exit;
+    }
+    ?>
 </div>
+
+<br>
+<br>
+
+<?php
+include("footer.php");
+?>
