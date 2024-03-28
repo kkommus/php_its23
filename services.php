@@ -35,7 +35,7 @@ if (isset($_GET['ok'])) {
 </form>
 
 <?php
-if (isset($_POST['nimetus'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nimetus = $_POST['nimetus'];
     $kirjeldus = $_POST['kirjeldus'];
     $hind = $_POST['hind'];
@@ -43,11 +43,6 @@ if (isset($_POST['nimetus'])) {
     // Juhusliku pildi URL-i hankimine Lorem Picsum'ist
     $image_id = rand(1, 1000); // Loob juhusliku pildi ID vahemikus 1-1000
     $image_url = "https://picsum.photos/id/{$image_id}/200/300"; // Genereerib juhusliku pildi URL-i
-
-    // Pildi allalaadimine ja salvestamine
-    $ajutine_fail = file_get_contents($image_url);
-    $pildinimi = uniqid() . '.jpg'; // Unikaalne pildi nimi
-    file_put_contents('img/' . $pildinimi, $ajutine_fail);
 
     // CSV faili kirjutamine
     $path = 'products.csv';
@@ -70,7 +65,7 @@ if (isset($_POST['nimetus'])) {
     // Kõikide ridade saamine feof = file-end-of-file
     while (!feof($minu_csv)) {
         // Ühe rea saamine, eraldatud komaga
-        $rida = fgetcsv($minu_csv, filesize($products), ",");
+        $rida = fgetcsv($minu_csv);
         if (is_array($rida)) {
             echo '
             <div class="col">
