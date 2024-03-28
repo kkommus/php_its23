@@ -1,12 +1,1 @@
-<?php
-include("header.php");
-?>
-
-
-<h1>Kontakt</h1>
-
-
-
-<?php
-include("footer.php");
-?>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae aspernatur ullam consequatur animi illum. Commodi accusamus, porro recusandae, in quisquam cupiditate eos minus obcaecati magni voluptates fuga illo ut reprehenderit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae aspernatur ullam consequatur animi illum. Commodi accusamus, porro recusandae, in quisquam cupiditate eos minus obcaecati magni voluptates fuga illo ut reprehenderit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae aspernatur ullam consequatur animi illum. Commodi accusamus, porro recusandae, in quisquam cupiditate eos minus obcaecati magni voluptates fuga illo ut reprehenderit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae aspernatur ullam consequatur animi illum. Commodi accusamus, porro recusandae, in quisquam cupiditate eos minus obcaecati magni voluptates fuga illo ut reprehenderit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae aspernatur ullam consequatur animi illum. Commodi accusamus, porro recusandae, in quisquam cupiditate eos minus obcaecati magni voluptates fuga illo ut reprehenderit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae aspernatur ullam consequatur animi illum. Commodi accusamus, porro recusandae, in quisquam cupiditate eos minus obcaecati magni voluptates fuga illo ut reprehenderit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae aspernatur ullam consequatur animi illum. Commodi accusamus, porro recusandae, in quisquam cupiditate eos minus obcaecati magni voluptates fuga illo ut reprehenderit. </p>

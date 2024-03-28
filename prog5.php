@@ -13,16 +13,38 @@ if (isset($_GET['page'])) {
 } else {
 ?>
 
-<div class="image-container">
-    <div>
-        <img src="image1.jpg" alt="Image 1" class="img-fluid">
-        <div class="image-caption">Vaata lähemalt</div>
+<br>
+
+
+<div class="row justify-content-center">
+    <div class="col-md-5 px-6 position-relative">
+        <img src="https://img.freepik.com/free-photo/woman-black-trousers-purple-blouse-laughs-leaning-stand-with-elegant-clothes-pink-background_197531-17614.jpg?t=st=1711635699~exp=1711639299~hmac=a00e3cc07bbbd948d93f72009013188686ecb1156b5d72b47fcd4eedf636e0eb&w=996" alt="Reklaam 1" style="width: 100%; max-width: 100%;">
+        <div class="text-block position-absolute top-50 start-0 translate-middle-y p-4" style="color: white; transform: translate(0%, -50%);">
+            <p><strong>parim pakkumine</strong></p>
+            <h4><strong>Osta 1 saad 2</strong></h4>
+            <p>The best classic dress is sale at coro</p> 
+            <button type="button" class="btn btn-outline-light mt-3" style="border-radius: 0;">Vaata lähemalt</button>
+
+            
+        </div>
     </div>
-    <div>
-        <img src="image2.jpg" alt="Image 2" class="img-fluid">
-        <div class="image-caption">Tutvu lähemalt</div>
+    <div class="col-md-5 px-6 position-relative">
+        <img src="https://img.freepik.com/free-photo/view-beige-tone-colored-pants_23-2150773384.jpg?t=st=1711638530~exp=1711642130~hmac=e347fbd89cd909cdd79249ce6b20b7cc9fc6964817fc37c935355a6326c1bfb0&w=996" alt="Reklaam 2" style="width: 100%; max-width: 100%;">
+        <div class="text-block position-absolute top-50 start-0 translate-middle-y p-4" style="color: white; transform: translate(0%, -50%);">
+        <p><strong>kevad/suvi</strong></p>
+            <h4><strong>kõik rohelised</strong></h4>
+            <p>20% soodsamalt</p> 
+            <button type="button" class="btn btn-outline-light mt-3" style="border-radius: 0;">Vaata lähemalt</button>
+
+        </div>
     </div>
 </div>
+
+
+
+
+
+
 
 <div class="container mt-5">
     <h1 class="text-center">Parimad pakkumised</h1><br>
