@@ -52,7 +52,7 @@ if (isset($_POST['nimetus'])) {
     // CSV faili kirjutamine
     $path = 'products.csv';
     $fp = fopen($path, 'a');
-    fputcsv($fp, array($nimetus, $kirjeldus, $hind, $pildinimi));
+    fputcsv($fp, array($nimetus, $kirjeldus, $hind, $image_url)); // Salvestab pildi URL-i
     fclose($fp);
 
     // Suunab "puhtale" lehele
@@ -75,7 +75,7 @@ if (isset($_POST['nimetus'])) {
             echo '
             <div class="col">
                 <div class="card">
-                    <img src="img/' . $rida[3] . '" class="card-img-top" alt="' . $rida[0] . '">
+                    <img src="' . $rida[3] . '" class="card-img-top" alt="' . $rida[0] . '">
                     <div class="card-body">
                     <h5 class="card-title">' . $rida[0] . '</h5>
                     <p class="card-text">' . $rida[1] . '</p>
