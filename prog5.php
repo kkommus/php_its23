@@ -90,7 +90,7 @@ if (isset($_GET['page'])) {
                     <div class="card-body">
                     <h5 class="card-title">' . $rida[0] . '</h5>
                     <p class="card-text">' . $rida[1] . '</p>
-                    <p class="card-text">Hind:  ' . $rida[2] . '€</p>
+                    <p class="card-text">  ' . $rida[2] . '€</p>
                     </div>
                 </div>
             </div>
