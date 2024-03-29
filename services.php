@@ -8,12 +8,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
 
     foreach ($rows as $row) {
         $data = str_getcsv($row);
+        // Kontrolli, kas rea esimene element (toote ID) vastab kustutatavale ID-le
         if ($data[0] !== $delete_id) {
             $output .= $row;
         }
     }
 
+    // Kirjuta ülejäänud read faili
     file_put_contents($products, $output);
+    // Suuna tagasi samale lehele
     header("Location: {$_SERVER['PHP_SELF']}");
     exit;
 }
