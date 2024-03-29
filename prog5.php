@@ -15,36 +15,26 @@ if (isset($_GET['page'])) {
 
 <br>
 
-
 <div class="row justify-content-center">
     <div class="col-md-5 px-6 position-relative">
-        <img src="https://img.freepik.com/free-photo/woman-black-trousers-purple-blouse-laughs-leaning-stand-with-elegant-clothes-pink-background_197531-17614.jpg?t=st=1711635699~exp=1711639299~hmac=a00e3cc07bbbd948d93f72009013188686ecb1156b5d72b47fcd4eedf636e0eb&w=996" alt="Reklaam 1" style="width: 100%; max-width: 100%;">
+        <img src="https://picsum.photos/200/200" alt="Reklaam 1" style="width: 100%; max-width: 100%;">
         <div class="text-block position-absolute top-50 start-0 translate-middle-y p-4" style="color: white; transform: translate(0%, -50%);">
             <p><strong>parim pakkumine</strong></p>
             <h4><strong>Osta 1 saad 2</strong></h4>
             <p>The best classic dress is sale at coro</p> 
             <button type="button" class="btn btn-outline-light mt-3" style="border-radius: 0;">Vaata lähemalt</button>
-
-            
         </div>
     </div>
     <div class="col-md-5 px-6 position-relative">
-        <img src="https://img.freepik.com/free-photo/view-beige-tone-colored-pants_23-2150773384.jpg?t=st=1711638530~exp=1711642130~hmac=e347fbd89cd909cdd79249ce6b20b7cc9fc6964817fc37c935355a6326c1bfb0&w=996" alt="Reklaam 2" style="width: 100%; max-width: 100%;">
+        <img src="https://picsum.photos/200/200" alt="Reklaam 2" style="width: 100%; max-width: 100%;">
         <div class="text-block position-absolute top-50 start-0 translate-middle-y p-4" style="color: white; transform: translate(0%, -50%);">
-        <p><strong>kevad/suvi</strong></p>
+            <p><strong>kevad/suvi</strong></p>
             <h4><strong>kõik rohelised</strong></h4>
             <p>20% soodsamalt</p> 
             <button type="button" class="btn btn-outline-light mt-3" style="border-radius: 0;">Vaata lähemalt</button>
-
         </div>
     </div>
 </div>
-
-
-
-
-
-
 
 <div class="container mt-5">
     <h1 class="text-center">Parimad pakkumised</h1><br>
@@ -61,7 +51,6 @@ if (isset($_GET['page'])) {
         $hind = array_push($read, $_POST['hind']);
         $pildinimi = array_push($read, $_FILES['lisapilt']['name']);
 
-
         $path = 'products.csv';
         $fp = fopen($path, 'a'); 
         fputcsv($fp, $read);
@@ -70,7 +59,6 @@ if (isset($_GET['page'])) {
         exit; // Lisatud exit, et lõpetada skripti töö pärast suunamist
     }
     ?>
-
 
     <div class="row row-cols-1 row-cols-md-4 g-4 pt-5">
         <?php
@@ -86,11 +74,11 @@ if (isset($_GET['page'])) {
                 echo '
             <div class="col">
                 <div class="card">
-                <img src="' . $rida[3] . '" class="card-img-top" alt="' . $rida[0] . '">
+                    <img src="' . $rida[3] . '" class="card-img-top" alt="' . $rida[0] . '">
                     <div class="card-body">
-                    <h5 class="card-title">' . $rida[0] . '</h5>
-                    <p class="card-text">' . $rida[1] . '</p>
-                    <p class="card-text">  ' . $rida[2] . '€</p>
+                        <h5 class="card-title">' . $rida[0] . '</h5>
+                        <p class="card-text">' . $rida[1] . '</p>
+                        <p class="card-text">  ' . $rida[2] . '€</p>
                     </div>
                 </div>
             </div>
