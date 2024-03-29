@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['delete_id'])) {
     <title>Teenused</title>
     <!-- Lisa siia oma stiilileht -->
     <style>
+        <style>
         h1 {
             font-size: 2.5rem; /* Muudab pealkirja suurust */
             font-weight: bold; /* Muudab pealkirja paksuks */
